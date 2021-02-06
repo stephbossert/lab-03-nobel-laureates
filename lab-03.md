@@ -1,7 +1,7 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Steph Bossert
+06 Feb 21
 
 ### Load packages and data
 
