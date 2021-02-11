@@ -74,9 +74,38 @@ about the nobel laurete
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+select(nobel,country, gender, died_date)
+```
+
+    ## # A tibble: 935 x 3
+    ##    country        gender died_date 
+    ##    <chr>          <chr>  <date>    
+    ##  1 Germany        male   1923-02-10
+    ##  2 Netherlands    male   1928-02-04
+    ##  3 Netherlands    male   1943-10-09
+    ##  4 France         male   1908-08-25
+    ##  5 France         male   1906-04-19
+    ##  6 <NA>           female 1934-07-04
+    ##  7 France         female 1934-07-04
+    ##  8 United Kingdom male   1919-06-30
+    ##  9 Germany        male   1947-05-20
+    ## 10 United Kingdom male   1940-08-30
+    ## # … with 925 more rows
+
+``` r
+filter(nobel, country == TRUE)
+```
+
+    ## # A tibble: 0 x 26
+    ## # … with 26 variables: id <dbl>, firstname <chr>, surname <chr>, year <dbl>,
+    ## #   category <chr>, affiliation <chr>, city <chr>, country <chr>,
+    ## #   born_date <date>, died_date <date>, gender <chr>, born_city <chr>,
+    ## #   born_country <chr>, born_country_code <chr>, died_city <chr>,
+    ## #   died_country <chr>, died_country_code <chr>, overall_motivation <chr>,
+    ## #   share <dbl>, motivation <chr>, born_country_original <chr>,
+    ## #   born_city_original <chr>, died_country_original <chr>,
+    ## #   died_city_original <chr>, city_original <chr>, country_original <chr>
 
 ### Exercise 3
 

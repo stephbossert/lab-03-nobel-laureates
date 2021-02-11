@@ -33,10 +33,9 @@ Each variable represents demogrpahic information about the nobel laurete
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r} 
+filter(nobel, country == TRUE)
+```
 
 ### Exercise 3
 
