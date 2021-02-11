@@ -33,24 +33,55 @@ Each variable represents demogrpahic information about the nobel laurete
 
 ### Exercise 2
 
-```{r} 
-filter(nobel, country == TRUE)
+```{r}
+nobel_living <- nobel %>%
+filter(is.na(died_date), (gender != "org"), (!is.na(country)))
+view(nobel_living)
 ```
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r}
+counts <- table(nobel_living_science$country_us, nobel_living_science$category)
+barplot(counts, main="Category of Prizes",
+  xlab="Category", col=c("darkblue","red"),
+  legend = rownames(counts), beside=TRUE,
+  
+)
+
+```
 
 ### Exercise 4
 
-...
+```{r}
+library(tidyverse)
+nobel_living <- nobel_living %>%
+  mutate(
+    country_us = if_else(country == "USA", "USA", "Other")
+  )
+nobel_living_science <- nobel_living %>%
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+view(nobel_living_science)
+```
+Exercise 4 Continued...
+```{r}
+nobel_living_science %>%
+mutate(born_country_us = country_us)
+view(nobel_living_science)
+table(nobel_living_science$born_country_us)
+###Answer: 147 born in the US
+
+```
 
 ### Exercise 5
-
-...
+```{R}
+counts <- table(nobel_living_science$country_us, nobel_living_science$category)
+barplot(counts, main="Category of Prizes",
+  xlab="Category", col=c("darkblue","red"),
+  legend = rownames(counts), beside=TRUE,
+  
+)
+```
 
 ### Exercise 6
 
