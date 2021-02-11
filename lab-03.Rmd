@@ -75,12 +75,12 @@ table(nobel_living_science$born_country_us)
 
 ### Exercise 5
 ```{R}
-counts <- table(nobel_living_science$country_us, nobel_living_science$category)
+counts <- table(nobel_living_science$born_country_us, nobel_living_science$category)
 barplot(counts, main="Category of Prizes",
   xlab="Category", col=c("darkblue","red"),
   legend = rownames(counts), beside=TRUE,
-  
 )
+###Results: It appears most nobel laureates were living in the US when they won, but were born in other countries. It appears that the US is a good place to be for those aspiring to be nobel laureates...
 ```
 
 ### Exercise 6
