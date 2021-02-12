@@ -13,6 +13,7 @@ library(tidyverse)
 
 ```{r load-data, message=FALSE}
 nobel <- read_csv("data/nobel.csv")
+view(nobel)
 ```
 
 ## Exercises
@@ -42,12 +43,9 @@ view(nobel_living)
 ### Exercise 3
 
 ```{r}
-counts <- table(nobel_living_science$country_us, nobel_living_science$category)
-barplot(counts, main="Category of Prizes",
-  xlab="Category", col=c("darkblue","red"),
-  legend = rownames(counts), beside=TRUE,
-  
-)
+ggplot(data = nobel_living_science, aes(x= category, fill=country_us)) +
+  geom_bar(stat = "count", position = position_dodge()) +
+  coord_flip()
 
 ```
 
@@ -55,34 +53,37 @@ barplot(counts, main="Category of Prizes",
 
 ```{r}
 library(tidyverse)
-nobel_living <- nobel_living %>%
+nobel_living_science <- nobel_living_science %>%
   mutate(
     country_us = if_else(country == "USA", "USA", "Other")
   )
-nobel_living_science <- nobel_living %>%
-  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
 view(nobel_living_science)
-```
-Exercise 4 Continued...
-```{r}
-nobel_living_science %>%
-mutate(born_country_us = country_us)
+nobel_living_science <- nobel_living_science %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA", "USA", "Other")
+  )
 view(nobel_living_science)
 table(nobel_living_science$born_country_us)
-###Answer: 147 born in the US
-
+  ###Answer: 147 born in the US
 ```
 
 ### Exercise 5
 ```{R}
-counts <- table(nobel_living_science$born_country_us, nobel_living_science$category)
-barplot(counts, main="Category of Prizes",
-  xlab="Category", col=c("darkblue","red"),
-  legend = rownames(counts), beside=TRUE,
-)
-###Results: It appears most nobel laureates were living in the US when they won, but were born in other countries. It appears that the US is a good place to be for those aspiring to be nobel laureates...
+ggplot(data=nobel_living_science, aes(x=Category)) +
+  geom_bar(aes(y=Count), stat="count", position ="count", alpha=.3, fill='lightblue', color='lightblue4') +
+  geom_bar(aes(y=End), stat="count", position="count", alpha=.8, fill='pink', color='red')
 ```
-
 ### Exercise 6
 
-...
+```{R}
+nobel_new<- filter(nobel_living_science, country_us == "USA", born_country_original != "USA")
+view(nobel_new)
+table(nobel_new$born_country_original)
+count(nobel_new, 'born_country_original')
+
+###Answer: 45 people won their prize in the US but were born outside the US. The Uk has the most amount of winners (7) born there but who won their prize in the US. 
+```
+
+
+
+
