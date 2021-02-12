@@ -68,11 +68,19 @@ table(nobel_living_science$born_country_us)
 ```
 
 ### Exercise 5
-```{R}
-ggplot(data=nobel_living_science, aes(x=Category)) +
-  geom_bar(aes(y=Count), stat="count", position ="count", alpha=.3, fill='lightblue', color='lightblue4') +
-  geom_bar(aes(y=End), stat="count", position="count", alpha=.8, fill='pink', color='red')
+
+```{r}
+###create new vars for four conditions 
+nobel_living_science<- nobel_living_science%>% 
+  mutate(Demographics = case_when(born_country_us == "USA" & country_us == "USA" ~ "Born & Won in USA", #condition 1
+                         born_country_us == "USA" & country_us == "Other" ~ "Born in USA, Won in Other Country", #condition 2
+                         born_country_us == "Other" & country_us == "Other" ~ "Born & Won in Other Country", #condition 3
+                         born_country_us == "Other" & country_us == "USA" ~ "Born in Other Country, Won in USA")) #condition 4
+view(nobel_living_science)
+ggplot(data = nobel_living_science)+ aes(x= category, fill= Demographics) +
+  geom_bar(stat = "count", position = position_dodge())
 ```
+
 ### Exercise 6
 
 ```{R}
